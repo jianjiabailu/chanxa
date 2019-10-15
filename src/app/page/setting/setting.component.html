@@ -1,0 +1,25 @@
+<ion-content>
+  <div class="m-list">
+    <div class="m-list-item flex-row middle arrow" routerLink="">
+      <img class="m-icon-md" [src]="service.imgs.setting.message" alt="">
+      <span class="flex">关于全潮</span>
+    </div>
+    <div class="m-list-item flex-row middle arrow" routerLink="">
+      <img class="m-icon-md" [src]="service.imgs.setting.voice" alt="">
+      <span class="flex">常见问题</span>
+    </div>
+    <div class="m-list-item flex-row middle arrow" routerLink="../feedback">
+      <img class="m-icon-md" [src]="service.imgs.setting.comment" alt="">
+      <span class="flex">意见反馈</span>
+    </div>
+  </div>
+
+  <!--<div class="m-list">-->
+    <!--<div class="m-list-item flex-row middle arrow" routerLink="../feedback">-->
+      <!--<img class="m-icon-md" [src]="img.setting.comment" alt="">-->
+      <!--<div class="flex">意见反馈</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="fab"><button class="m-btn block theme" (click)="logout()">退出登录</button></div>
+</ion-content>

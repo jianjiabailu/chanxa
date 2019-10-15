@@ -1,0 +1,42 @@
+<ion-content #content [scrollEvents]="true" (ionScrollEnd)="scrollEnd()">
+  <div class="header-bar text-center">
+    <div>{{storeInfo['shopName']}}</div>
+    <div class="grade">
+      <i class="m-icon m-icon-love"></i>
+      <i class="m-icon m-icon-love"></i>
+      <i class="m-icon m-icon-love"></i>
+      <i class="m-icon m-icon-love"></i>
+      <i class="m-icon m-icon-love"></i>
+    </div>
+    <div class="flex-row around">
+      <button class="m-btn">联系客服</button>
+      <button class="m-btn" [class.active]="is_favorite" (click)="collectStore()">收藏</button>
+    </div>
+  </div>
+
+  <div class="tabs-bar flex-row text-center">
+    <div class="flex" (click)="orderBySearch('all')" [class.active]="order_type=='all'">综合</div>
+    <div class="flex" (click)="orderBySearch('salesNums')" [class.active]="order_type=='salesNums'">销量</div>
+    <div class="flex flex-row center middle" (click)="orderBySearch('listPrice')"
+         [class.active]="order_type=='listPrice'"
+         [class.up]="order_by=='asc'"
+         [class.down]="order_by=='Desc'">
+      <span>价格</span><i class="m-icon m-icon-updown"></i>
+    </div>
+  </div>
+
+  <div class="goods-list">
+    <ul>
+      <li *ngFor="let i of storeInfo['defaultGoods']">
+        <div class="goods-item" routerLink="../../goodsDetail/{{i.goodsId}}">
+          <div class="img"><img [src]="service.img_server+i.goodsImg" alt=""></div>
+          <div class="title ellipse">{{i.goodsName}}</div>
+          <div class="mark text-center">￥{{i.listPrice}}</div>
+        </div>
+      </li>
+      <li style="background-color: white;" class="flex-column center middle" *ngIf="loading">
+        <img [src]="service.imgs.icon.loading" alt="">
+      </li>
+    </ul>
+  </div>
+</ion-content>

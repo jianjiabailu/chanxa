@@ -1,0 +1,145 @@
+<ion-content #scrollBox [scrollEvents]="true" (ionScroll)="scrolling()" >
+
+  <div class="header-bar flex-row center middle shadow" #header [style.opacity]="header_opacity">
+    <span (click)="scrollTo(dom_goods)" [class.mark]="active_num == 0">宝贝</span>
+    <span (click)="scrollTo(dom_stores)" [class.mark]="active_num == 1">店铺</span>
+    <span (click)="scrollTo(dom_evaluate)" [class.mark]="active_num == 2">评价</span>
+    <span (click)="scrollTo(dom_details)" [class.mark]="active_num == 3">详情</span>
+  </div>
+
+  <!-- 商品图片展示 -->
+  <!--<div class="carousel">-->
+    <!--<ion-slides pager="true" [options]="slideOpts">-->
+      <!--<ion-slide></ion-slide>-->
+    <!--</ion-slides>-->
+  <!--</div>-->
+
+  <!--商品主图和标题-->
+  <div class="good-title flex-column" #goods>
+    <!--商品图片-->
+    <div><img *ngIf="goodsDetail.goodsImg" [src]="service.img_server+goodsDetail.goodsImg"></div>
+    <div>
+      <!--商品名称-->
+      <p>{{goodsDetail['goodsName']}}</p>
+      <!--商品价格-->
+      <h4 class="mark">￥{{goodsDetail['listPrice']}}</h4>
+    </div>
+  </div>
+
+  <!-- 店铺信息 -->
+  <div class="store-info" #stores>
+    <div class="flex-row">
+      <!--店铺LOGO-->
+      <div class="store-logo"><img *ngIf="store_info.logoImage" [src]="service.img_server+store_info.logoImage" alt=""></div>
+      <div class="flex flex-column around">
+        <!--店铺名称-->
+        <div>{{store_info.shopName}}</div>
+        <div class="flex-row">
+          <small>产品描述 <span class="mark">{{store_info.productSocre}}</span></small>
+          <small>服务质量 <span class="mark">{{store_info.serviceSocre}}</span></small>
+          <small>物流速度 <span class="mark">{{store_info.logisticsScore}}</span></small>
+        </div>
+      </div>
+    </div>
+    <div class="flex-row around">
+      <button class="m-btn">联系客服</button>
+      <button class="m-btn" routerLink="../../store/{{store_info.shopId}}">进入店铺</button>
+    </div>
+  </div>
+
+  <!-- 商品评价 -->
+  <div class="m-panel evaluate" #evaluate [class.full-screen]="status=='evaluate'">
+    <!--商品评价数-->
+    <div class="m-panel-hd flex-row between middle">
+      <span>商品评价（{{evaluates['total']}}）</span>
+      <small class="more flex-row middle" routerLink="./" [queryParams]="{status:'evaluate'}" (click)="status='evaluate'">
+        <span>{{evaluates.total > 0 ? "查看更多" : "暂无评价"}}</span><i class="m-icon m-icon-arrow"></i>
+      </small>
+    </div>
+    <div class="m-panel-bd" *ngIf="evaluates.total>0">
+      <ul class="evaluate-list">
+        <li *ngFor="let i of evaluates['rows']">
+          <div class="flex-row middle" style="padding-bottom: .5em">
+            <!--评价人的LOGO-->
+            <span class="logo"><img *ngIf="i.headImg" [src]="service.img_server+i.headImg" alt=""></span>
+            <!--评价人的手机号码-->
+            <span>{{i.mobile}}</span>
+          </div>
+          <!--评价内容-->
+          <small>{{i.commentContent}}</small>
+        </li>
+        <!--<li class="text-center" *ngIf="evaluates['total'] > 0"><button class="m-btn">查看全部评价</button></li>-->
+      </ul>
+    </div>
+  </div>
+
+  <!-- 图文详情 -->
+  <div class="details-info" #details>
+    <div class="m-lines" style="padding: 0;">
+      <hr><span class="text">图文详情</span><hr>
+    </div>
+    <p>{{intro_text}}</p>
+    <div class="text-center flex-column"><img *ngFor="let img of intro_imgs" [src]="service.img_server+img" alt=""></div>
+  </div>
+
+  <!--规格属性-->
+  <div class="specifications" *ngIf="attr_window" (click)="clickEvent($event,true)">
+    <div class="content" (click)="clickEvent($event,false)">
+      <div class="content_hd flex-row">
+        <!--商品缩略图-->
+        <div class="pic"><img *ngIf="goodsDetail.goodsImg" [src]="service.img_server+goodsDetail.goodsImg"></div>
+        <div class="flex">
+          <!--商品名称-->
+          <p class="ellipse-3">{{goodsDetail['goodsName']}}</p>
+          <!--商品价格-->
+          <p class="mark">￥52.00</p>
+        </div>
+        <!--关闭按钮-->
+        <div class="close"><img class="m-icon-md" [src]="service.imgs.icon.close" alt="" (click)="attr_window = false"></div>
+      </div>
+      <div class="content_bd flex-column">
+        <!--选择购买规格-->
+        <div *ngFor="let item of attr">
+          <!--规格名称-->
+          <p>{{item['catagoryAttrName']}}</p>
+          <p class="attr">
+            <!--可选规格-->
+            <button class="m-btn" *ngFor="let i of item['catagoryAttrValueList']"
+                    [class.selected]="selected_attr.attr[i['catagoryAttrId']] == i['catagoryAttrValueId']"
+                    (click)="selectAttr(i)">{{i['catagoryAttrValueName']}}
+            </button>
+          </p>
+        </div>
+
+        <!--选择购买数量-->
+        <div class="count">
+          <p>数量</p>
+          <!--步进器-->
+          <p class="step flex-row text-center">
+            <span (click)="count(false)">-</span>
+            <span>{{selected_attr.amounts}}</span>
+            <span (click)="count(true)">+</span>
+          </p>
+        </div>
+      </div>
+      <div class="content_fd">
+        <button class="m-btn block theme" (click)="submitGoods()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!--操作栏-->
+  <div class="flex-row ft-links">
+    <div class="flex store" routerLink="../../store/{{goodsDetail.shopId}}">
+      <i class="m-icon m-icon-home"></i>
+      <span>店铺</span>
+    </div>
+    <div class="flex collect" [class.active]="goodsDetail['isFavorite'] == '1'" (click)="collectGoods()">
+      <i class="m-icon m-icon-collection"></i>
+      <span>收藏</span>
+    </div>
+    <div class="flex shopping-cart" (click)="getGoodsSku('toCart')">加入购物车</div>
+    <div class="flex buy" (click)="getGoodsSku('buyNow')">立即购买</div>
+  </div>
+
+</ion-content>

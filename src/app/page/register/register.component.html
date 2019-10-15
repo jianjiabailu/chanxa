@@ -1,0 +1,40 @@
+<ion-content padding>
+  <!--表单控件-->
+  <form class="m-input-group">
+    <!--手机号码-->
+    <label class="m-input-item">
+      <span class="icon"><img [src]="service.imgs.icon.mobile" alt="手机号"></span>
+      <input type="number" name="mobile" [(ngModel)]="form_data.reg_user.mobile" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="请输入手机号">
+      <i class="m-clear" *ngIf="form_data.reg_user.mobile" (click)="form_data.reg_user.mobile=null"><img [src]="service.imgs.icon.delete" alt="x"></i>
+    </label>
+    <!--短信验证码-->
+    <label class="m-input-item">
+      <span class="icon"><img [src]="service.imgs.icon.verify" alt="验证码"></span>
+      <input type="text" name="code" [(ngModel)]="form_data.reg_user.validate_code" placeholder="请输入短信验证码">
+      <i class="m-clear" *ngIf="form_data.reg_user.validate_code" (click)="form_data.reg_user.validate_code=null"><img [src]="service.imgs.icon.delete" alt="x"></i>
+      <button class="m-btn theme" (click)="sendCode()" [disabled]="!(form_data.reg_user.mobile && !clock['on-off'])">
+        {{clock["on-off"]?clock.interval+'S':clock.value}}
+      </button>
+    </label>
+    <!--密码-->
+    <label class="m-input-item">
+      <span class="icon"><img [src]="service.imgs.icon.password" alt="密码"></span>
+      <input type="password" name="password" [(ngModel)]="form_data.reg_user.password" placeholder="设置密码（6-20位数字和字母结合）">
+      <i class="m-clear" *ngIf="form_data.reg_user.password" (click)="form_data.reg_user.password=null"><img [src]="service.imgs.icon.delete" alt="x"></i>
+    </label>
+    <!--确认密码-->
+    <label class="m-input-item">
+      <span class="icon"><img [src]="service.imgs.icon.password_confirm" alt="密码"></span>
+      <input type="password" name="repassword" [(ngModel)]="form_data.reg_user.repassword" placeholder="确认密码（6-20位数字和字母结合）">
+      <i class="m-clear" *ngIf="form_data.reg_user.repassword" (click)="form_data.reg_user.repassword=null"><img [src]="service.imgs.icon.delete" alt="x"></i>
+    </label>
+    <!--软件许可及服务协议-->
+    <label for="remember" class="m-checkbox">
+      <div class="checkbox-main" [class.active]="isAgree"><div class="checkbox-inner"></div></div>
+      <div class="checkbox-text">阅读并同意 <a routerLink="../pages/license">《软件许可及服务协议》</a></div>
+      <input type="checkbox" id="remember" [hidden]="true" name="isAgree" [(ngModel)]="isAgree">
+    </label>
+    <!--提交按钮-->
+    <button class="m-btn block theme" [disabled]="!isAgree" (click)="submitForm()">确认</button>
+  </form>
+</ion-content>

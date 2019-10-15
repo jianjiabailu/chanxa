@@ -1,0 +1,43 @@
+<ion-content>
+  <!--订单列表-->
+  <div class="m-panel-group">
+    <div class="m-panel" *ngFor="let item of my_orders">
+      <div class="m-panel-hd flex-row middle">
+        <!--店铺LOGO-->
+        <img class="logo" [src]="service.img_server+item.logo_image" alt="">
+        <!--店铺名称-->
+        <span class="flex">{{item['shop_name']}}</span>
+        <!--订单状态-->
+        <span class="mark">{{item['statusCN']}}</span>
+        <i class="m-icon m-icon-arrow"></i>
+
+      </div>
+      <div class="flex-row m-panel-bd" *ngFor="let i of item.items">
+        <!--商品图片-->
+        <div class="picture"><img [src]="service.img_server+i.sku_image" alt=""></div>
+        <div class="flex orders-item">
+          <div class="flex-row end">
+            <!--商品名称-->
+            <div class="left ellipse">{{i.item_name}}</div>
+            <!--商品价格-->
+            <div class="right text-end">￥{{i.price}}.00</div>
+          </div>
+          <div class="flex-row end">
+            <!--商品规格-->
+            <div class="left">
+              <span class="attr" *ngFor="let m of i.attrList">{{m.catagory_attr_name +"："+ m.catagory_attr_value_name}}</span>
+            </div>
+            <!--商品数量-->
+            <div class="right text-end">X{{i.nums}}</div>
+          </div>
+        </div>
+      </div>
+      <!--店铺合计-->
+      <div class="m-panel-ft text-end">本店合计：￥{{item.item_total}}.00</div>
+      <div class="m-panel-ft text-end">
+        <!--<button class="m-btn">撤销申请</button>-->
+        <button class="m-btn" routerLink="../refundsDetail/{{item.order_id}}">退款详情</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

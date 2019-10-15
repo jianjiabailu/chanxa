@@ -1,0 +1,60 @@
+<ion-content>
+  <div class="m-list" *ngIf="!uploadimg">
+    <div class="m-list-item flex-row between middle arrow">
+      <div>头像</div>
+      <label class="picture" for="upload" *ngIf="my_info.headImg"><img [src]="service.img_server+my_info.headImg" alt=""></label>
+    </div>
+    <div class="m-list-item flex-row between">
+      <div>名称</div>
+      <input type="text" name="name" [(ngModel)]="my_info.customerName" placeholder="请输入名称">
+    </div>
+    <div class="m-list-item flex-row between">
+      <div>性别</div>
+      <ion-select mode="ios"
+                  interface="action-sheet"
+                  cancelText="取消" okText="确定"
+                  name="mobile" [(ngModel)]="my_info.sex"
+                  placeholder="请选择性别">
+        <ion-select-option [value]="1">男</ion-select-option>
+        <ion-select-option [value]="2">女</ion-select-option>
+      </ion-select>
+    </div>
+    <div class="m-list-item flex-row between">
+      <div>手机</div>
+      <input type="text" name="mobile" [(ngModel)]="my_info.mobile" placeholder="请输入手机">
+    </div>
+    <div class="m-list-item flex-row between">
+      <div class="flex">地址</div>
+      <ion-textarea name="address" rows="3" maxlength="34" [(ngModel)]="my_info.address" placeholder="请输入地址"></ion-textarea>
+    </div>
+
+    <div style="padding: 0 .5em;"><button class="m-btn block theme" (click)="saveMyInfo()">保存</button></div>
+
+  </div>
+  <div *ngIf="uploadimg">
+    <!-- 裁剪区域 -->
+    <div class="cropping" (touchstart)="touchstart($event)" (touchend)="touchend($event)">
+      <div id="cropArea" class="cropArea" [ngStyle]="position" (touchmove)="touchmove($event)">
+        <div class="cropArea-corner leftTop"></div>
+        <div class="cropArea-corner leftBottom"></div>
+        <div class="cropArea-corner rightTop"></div>
+        <div class="cropArea-corner rightBottom"></div>
+      </div>
+      <!-- 预览图片 -->
+      <img id="uploadimg" [src]="uploadimg" alt="">
+    </div>
+
+    <!-- 操作区域 -->
+    <div class="btn-bar flex-row">
+      <!--<label for="upload" class="m-btn">重新上传</label>-->
+      <button class="m-btn block theme" (click)="tailor()">确定</button>
+    </div>
+
+    <!-- 预览区域 -->
+    <div><img [src]="cropimg" alt=""></div>
+
+  </div>
+
+  <input type="file" id="upload" accept="image/*" (change)="uploadImg($event)" [hidden]="'hidden'">
+
+</ion-content>

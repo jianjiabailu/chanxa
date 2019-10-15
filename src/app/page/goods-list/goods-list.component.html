@@ -1,0 +1,63 @@
+<ion-content #content [scrollEvents]="true" (ionScroll)="scrolling()" (ionScrollEnd)="scrollEnd()">
+  <header>
+    <div class="header-bar flex-row text-center">
+      <!--综合查找-->
+      <div class="flex" (click)="orderBySearch('all')" [class.active]="order_type=='all'">综合</div>
+      <!--按销量查找-->
+      <div class="flex" (click)="orderBySearch('salesNums')" [class.active]="order_type=='salesNums'">销量</div>
+      <!--按价格升序或降序查找-->
+      <div class="flex"
+           (click)="orderBySearch('listPrice')"
+           [class.active]="order_type=='listPrice'"
+           [class.up]="params.orderBy=='asc'"
+           [class.down]="params.orderBy=='Desc'"
+      >价格 <i class="m-icon m-icon-updown"></i></div>
+      <!--价格筛选-->
+      <div class="flex" (click)="range.view = !range.view">筛选</div>
+    </div>
+    <!--选择价格筛选范围-->
+    <div class="range" *ngIf="range.view">
+      <div>
+        <!--<ion-item lines="none">-->
+          <!--&lt;!&ndash;ionic的范围选择组件&ndash;&gt;-->
+          <!--<ion-range mode="ios" name="range" [(ngModel)]="range.value" dualKnobs="true" [min]="range.min" [max]="range.max" step="3" snaps="true" pin="true"></ion-range>-->
+        <!--</ion-item>-->
+        <!--筛选范围-->
+        <div class="m-list-item flex-row center middle">
+          <span>价格区间：</span>
+          <input class="m-btn" type="number" name="lower" [(ngModel)]="range.value['lower']" placeholder="最低价">
+          <span style="margin: 0 .5em;color: #CDCDCD;"> --- </span>
+          <input class="m-btn" type="number" name="lower" [(ngModel)]="range.value['upper']" placeholder="最高价">
+        </div>
+        <div class="m-list-item text-center"><button class="m-btn block theme" (click)="rangeSearch()">确定</button></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="goods-list" *ngIf="!tip">
+    <ion-row>
+      <ion-col size="6" *ngFor="let i of my_goods_list">
+        <div class="goods-item" (click)="saveData()" routerLink="../goodsDetail/{{i.goods_id}}">
+          <div class="img"><img [src]="service.img_server+i.goods_image" alt=""></div>
+          <div style="padding: .1em .5em;">
+            <!--商品名称-->
+            <p class="title ellipse">{{i.goods_name}}</p>
+            <!--商品价格-->
+            <h5 class="mark text-center">￥{{i.list_price}}</h5>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <div class="m-lines" *ngIf="tip" style="padding: 0;">
+      <hr><span class="text">暂无更多商品</span><hr>
+    </div>
+  </div>
+
+  <!--无数据状态-->
+  <div class="none-content text-center" *ngIf="tip">
+    <p><img class="icon" [src]="service.imgs.icon.wudingdang" alt=""></p>
+    <p>查找不到数据</p>
+    <p><button class="m-btn theme-border" routerLink="../../tabs/home">随便逛逛</button></p>
+  </div>
+
+</ion-content>

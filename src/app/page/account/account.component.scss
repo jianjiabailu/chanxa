@@ -1,0 +1,28 @@
+
+.info-header{
+  color: white;
+  padding: 30px 0;
+  position: relative;
+  text-align: center;
+  background-color: white;
+  background-size: cover;
+  .portrait{
+    margin: 0 auto;
+    display: inline-block;
+    width: 80px; height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #e5e5e5;
+  }
+  .setting{
+    display: inline-block;
+    width: 20px; height: 20px;
+    position: absolute;
+    right: 1em; top: 1em;
+  }
+}
+
+.m-list{
+  margin: 10px 5px;
+  p{white-space: nowrap;overflow: hidden;margin: 0 0 .5em;}
+}

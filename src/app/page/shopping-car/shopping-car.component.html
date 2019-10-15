@@ -1,0 +1,58 @@
+
+  <!--全选和编辑-->
+  <header class="flex-row between">
+    <div class="flex-row middle">
+      <ion-checkbox *ngIf="editor['on-off']" mode="ios" color="danger" [checked]="isSelectedGoods('all',my_cart)" (click)="selectGoods('all',my_cart,$event)"></ion-checkbox>
+      <ion-label *ngIf="editor['on-off']">全选</ion-label>
+    </div>
+    <div class="flex-row center">
+      <span *ngIf="!editor['on-off']" (click)="editor['on-off']=true">编辑</span>
+      <span *ngIf="editor['on-off']" (click)="editCart()">完成</span>
+    </div>
+  </header>
+
+  <!-- 购物车清单 -->
+  <div class="m-panel" *ngFor="let item of my_cart">
+    <div class="panel-hd flex-row middle">
+      <!--该复选框选择店铺中所有商品-->
+        <ion-checkbox mode="ios" color="danger" [checked]="isSelectedGoods('store',item)" (click)="selectGoods('goodsGroup',item,$event)"></ion-checkbox>
+        <span>{{item.sName}}</span>
+    </div>
+    <div class="panel-bd flex-row middle" *ngFor="let i of item.skuList">
+      <!--该复选框选择店铺中指定商品-->
+      <div><ion-checkbox mode="ios" color="danger" [checked]="i['selected']" (ionChange)="selectGoods('goodsItem',i,$event)"></ion-checkbox></div>
+      <div class="car-item flex flex-row start">
+        <!--商品缩略图-->
+        <div class="item-pic"><img class="weui-media-box__thumb" [src]="service.img_server+i.pImage" alt=""></div>
+        <div class="item-bd flex flex-column">
+          <!--商品名称和价格-->
+          <div class="item-title ellipse" routerLink="../../pages/goodsDetail/{{i.goodsId}}">{{i.pName}}</div>
+          <div class="item-info"><span>{{i.skuTitle}}</span><span class="mark">￥{{i.pPrice}}.00</span></div>
+          <!--编辑数量或删除-->
+          <div class="item-edit">
+            <div class="stepper"><span (click)="count(i,false,$event)">-</span><span class="num">{{i.num}}</span><span (click)="count(i,true,$event)">+</span></div>
+            <img class="icon" (click)="deleteCart(i.pId,$event)" [src]="service.imgs.icon.trash" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 无数据状态 -->
+  <div class="none-content text-center" *ngIf="my_cart.length <= 0">
+    <p><img class="icon" [src]="service.imgs.icon.wudingdang" alt=""></p>
+    <p>您还没有相关记录</p>
+    <p><button class="m-btn theme-border" routerLink="../home">随便逛逛</button></p>
+  </div>
+
+  <!--底部-->
+  <footer>
+    <!-- 结算栏 -->
+    <div class="clearing-bar">
+      <small *ngIf="!editor['on-off']">合计：￥</small>
+      <span *ngIf="!editor['on-off']">{{calculate()}}.00</span>
+      <button class="m-btn" *ngIf="!editor['on-off']" (click)="buyNow()">立即购买</button>
+      <button class="m-btn" *ngIf="editor['on-off']" (click)="clearCart()">删除</button>
+    </div>
+  </footer>
+

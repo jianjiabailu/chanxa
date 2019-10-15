@@ -1,0 +1,59 @@
+
+header{padding: 1em .5em;background-color: white;height: 50px;margin-bottom: 10px;}
+
+.car-item{
+  .item-pic{width: 100px;height: 100px;margin-right: 1em;}
+  .item-bd{
+    >div:not(:last-child){margin-bottom: .5em;}
+    .item-title{padding-right: 2em;}
+    .item-info,.item-edit{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .item-edit{
+      .icon{height: 1.6em;}
+      .stepper{
+        span{
+          color: #CDCDCD;
+          display: inline-block;
+          width: 1.6em; height: 1.6em;
+          text-align: center;
+          line-height: 1.6em;
+          border-radius: 2px;
+          border: 1px solid #CDCDCD;
+        }
+        span.num{width: 2em;color: #4e4e4e;margin: 0 5px;}
+        span:active{color: #5EC6C3;border: 1px solid #5EC6C3;}
+      }
+    }
+  }
+}
+
+ion-checkbox{margin-right: 1em;}
+
+footer{
+  position: fixed;
+  left: 0; bottom: 56px;
+  width: 100%; height: auto;
+  background-color: white;
+  .clearing-bar{
+    color: #4E4E4E;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    button.m-btn{
+      color: white; height: 50px;
+      padding: 14px 20px;
+      margin-left: 1em;
+      font-size: 16px;
+      border-radius: 0;
+      outline: none;border: none;
+      background-color: #87D647;
+    }
+  }
+
+}

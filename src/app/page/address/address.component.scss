@@ -1,0 +1,22 @@
+
+.m-list-item{
+  padding: 1em; color: #4E4E4E;
+  input{text-align: end;flex: 1;color: inherit;}
+  weui-city-picker{flex: 1;padding-right: 1em;color: inherit;}
+  select{border: none;}
+}
+
+
+ion-textarea{
+  flex: 1.2;
+  text-align: end;
+  --padding-top : 0;
+  --padding-end : 0;
+}
+
+ion-select{
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: .5em;
+  --padding-end: .5em;
+}

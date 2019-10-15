@@ -1,0 +1,35 @@
+<ion-content padding>
+  <h6>退款类型：</h6>
+  <div>
+    <ion-item lines="full" (click)="refund_data.type=10;">
+      <ion-label>仅退款</ion-label>
+      <ion-checkbox mode="ios" color="success" [checked]="refund_data.type==10"></ion-checkbox>
+    </ion-item>
+    <ion-item lines="none" (click)="refund_data.type=20">
+      <ion-label>退货退款</ion-label>
+      <ion-checkbox mode="ios" color="success" [checked]="refund_data.type==20"></ion-checkbox>
+    </ion-item>
+  </div>
+
+  <h6 style="margin-top: 1em;">退款原因：</h6>
+  <div class="m-list select-box">
+    <ion-item lines="none" (click)="refund_data.select=!refund_data.select">
+      <ion-label>{{refund_data.reason}}七天无理由退货</ion-label>
+      <img class="m-icon-xs" [src]="service.imgs.icon.arrow_down" alt="">
+    </ion-item>
+    <div class="select-option" *ngIf="refund_data.select">
+      <div class="m-list-item" (click)="refund_data.reason=10;refund_data.select=false">协商退款</div>
+      <div class="m-list-item" (click)="refund_data.reason=20;refund_data.select=false">产品质量问题</div>
+      <div class="m-list-item" (click)="refund_data.reason=30;refund_data.select=false">服务态度问题</div>
+      <div class="m-list-item" (click)="refund_data.reason=40;refund_data.select=false">七天无理由退货</div>
+    </div>
+  </div>
+
+  <h6 style="margin-top: 1em;">退款说明：</h6>
+  <div class="m-list-item">
+    <ion-textarea maxlength="200" rows="6" name="password" [(ngModel)]="refund_data.explain" placeholder="请输入退款详细原因"></ion-textarea>
+    <div class="text-end">{{refund_data.explain.length}}/200</div>
+  </div>
+
+  <p><button class="m-btn block theme" (click)="submitRefunds()">提交</button></p>
+</ion-content>

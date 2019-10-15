@@ -1,0 +1,78 @@
+
+  <!-- 顶部搜索栏 -->
+  <div class="top-search">
+    <!--点击跳转至搜索页-->
+    <div class="flex-row center" routerLink="../../pages/search">
+      <span class="icon-md"><img [src]="service.imgs.icon.search" alt=""></span>
+      <span style="margin-left: .5em;">搜索</span>
+    </div>
+  </div>
+
+  <!-- 头部轮播图 -->
+  <ion-slides pager="true" [options]="slideOpts" *ngIf="banner">
+    <ion-slide *ngFor="let i of banner">
+      <a href="{{i.eventValue}}" class="flex-column"><img [src]="service.img_server+i.advertisementImage"></a>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- 快速通道链接 -->
+  <div class="speed-link flex-row middle text-center">
+    <div class="flex">
+      <img class="icon" src="../../assets/images/icon/My_Coupons.png" alt="">
+      <div>聚划算</div>
+    </div>
+    <div class="flex">
+      <img class="icon" src="../../assets/images/icon/My_Coupons.png" alt="">
+      <div>领钱了</div>
+    </div>
+    <div class="flex">
+      <img class="icon" src="../../assets/images/icon/My_Coupons.png" alt="">
+      <div>优惠码</div>
+    </div>
+    <div class="flex">
+      <img class="icon" src="../../assets/images/icon/My_Coupons.png" alt="">
+      <div>全部</div>
+    </div>
+  </div>
+
+  <!-- 主题街 -->
+  <div style="padding: .5em;">
+    <p class="title">主题街</p>
+    <div class="theme-content flex-row">
+      <div class="left flex-column">
+        <!-- 主图 -->
+        <div class="theme-item flex-column-reverse middle">
+          <!--主题图片 -->
+          <img src="../../assets/images/icon/My_Coupons.png" alt="">
+          <!--主题名称-->
+          <b class="classify">111</b>
+        </div>
+      </div>
+      <div class="right flex-column">
+        <!--附图-->
+        <div class="theme-item flex-column-reverse middle" *ngFor="let i of themes">
+          <!--主题图片-->
+          <img [src]="i.image" alt="">
+          <!--主题名称-->
+          <b class="classify">{{i.type}}</b>
+        </div>
+      </div>
+    </div>
+
+    <!--其他主题列表-->
+    <ion-row>
+      <ion-col size="4" *ngFor="let i of themes">
+        <!--点击跳转到商品列表页-->
+        <div class="box">
+          <!--主题图片-->
+          <img src="../../assets/images/icon/My_Coupons.png" alt="">
+          <!--主题名称-->
+          <b class="classify">测试</b>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- 悬浮的扫一扫按钮 -->
+  <!-- <div class="fab-btn" (click)="scanQRCode()"><img [src]="service.imgs.home.scan" alt=""></div> -->
+

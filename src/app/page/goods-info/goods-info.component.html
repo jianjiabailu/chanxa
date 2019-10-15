@@ -1,0 +1,29 @@
+<ion-content class="main-info">
+
+  <!-- 状态切换栏 -->
+  <div class="state flex-row text-center">
+    <div class="flex" [class.mark]="!child_views" (click)="child_views = false">图文详情</div>
+    <div class="flex" [class.mark]="child_views" (click)="child_views = true">评价（0）</div>
+  </div>
+
+  <!-- 图文详情 -->
+  <div class="details-info" *ngIf="!child_views">
+    <p>{{goodsText}}</p>
+    <div class="text-center"><img *ngFor="let img of goodsimgs" [src]="service.img_server+img" alt=""></div>
+  </div>
+
+  <!-- 商品评价 -->
+  <ul class="evaluate-list" *ngIf="child_views">
+    <li *ngFor="let i of [1,1,2]">
+      <div class="flex-row between middle" style="margin-bottom: .5em;">
+        <div class="flex-row middle">
+          <span class="logo"><img src="" alt=""></span>
+          <span>154****4678</span>
+        </div>
+        <time><small>2018-12-27</small></time>
+      </div>
+      <small>由于夜晚拍摄图片效果不是很好，随手拍了两张，请见谅，和先买的华为手机稍作对比了一下）用了几天才来评价，到手第一感觉手机确实很惊艳！目前为止我用过的最颜值机，</small>
+    </li>
+  </ul>
+</ion-content>
+

@@ -1,0 +1,18 @@
+.header-bar{
+  background-color: white;
+  >div{padding: .8em 0;position: relative;flex: 1;}
+  >div.active{color: #5EC6C3;}
+  >div.active:after{
+    content: '';
+    background-color: #5EC6C3;
+    position: absolute;
+    left: 15%; bottom: 0;
+    width: 70%; height: 2px;
+  }
+}
+.m-panel{
+  margin-top: 10px;
+  .logo{width: 1.8em;height: 1.8em;border-radius: 2px;margin-right: .6em;}
+  .picture{width: 80px; height: 80px;margin-right: 10px;}
+  .m-btn{margin-left: 1em;color: #5DC6C1;border-color: #5DC6C1;}
+}

@@ -1,0 +1,21 @@
+<ion-content padding>
+  <div class="select-box">
+    <div class="m-list-item flex-row middle" (click)="type_select=!type_select">
+      <span class="flex">请选择反馈类型</span>
+      <span>{{feedback_type}}</span>
+      <img class="m-icon-xs" [src]="service.imgs.icon.arrow_down" alt="">
+    </div>
+    <div class="select-option" *ngIf="type_select">
+      <div class="m-list-item" *ngFor="let item of types" (click)="feedback_type=item;type_select=false;">
+        {{item}}
+      </div>
+    </div>
+  </div>
+  <div class="m-list-item">
+    <ion-textarea rows="6" placeholder="请留下您的宝贵意见（200字内）" name="content" [(ngModel)]="content"></ion-textarea>
+  </div>
+  <div class="m-list-item">
+    <input type="text" placeholder="请输入您的手机号" name="mobile" [(ngModel)]="mobile">
+  </div>
+  <div><button class="m-btn block theme" (click)="submitFeedback()">提交申请</button></div>
+</ion-content>

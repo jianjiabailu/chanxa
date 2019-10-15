@@ -1,0 +1,38 @@
+.main-info{
+
+  .state{
+    margin-bottom: 1px;
+    div{padding: .6em .8em;background-color: white;position: relative;}
+    div:first-child{margin-right: 2px;}
+    div.mark:after{
+      content: '';
+      width: 40%; height: 1px;
+      border-bottom: 2px solid #e83e8c;
+      position: absolute;
+      left: 30%; bottom: 5px;
+    }
+  }
+
+  .details-info{
+    margin-top: 2px;
+    padding: .6em .8em;
+  }
+
+  .evaluate-list{
+    li{
+      padding: .6em .8em;
+      background-color: white;
+      border-bottom: 2px solid #F0F0F0;
+    }
+    li:first-child{border-top: 1px solid #F0F0F0;}
+    .logo{
+      margin-right: .8em;
+      display: inline-block;
+      width: 30px;height: 30px;
+      background-color: #D8D8D8;
+      border: 1px solid #979797;
+    }
+    time{color: #959595;}
+  }
+
+}

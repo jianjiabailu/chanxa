@@ -1,0 +1,55 @@
+<ion-content padding>
+  <div>
+    <!--表单控件-->
+    <form class="m-input-group">
+      <!--账户输入-->
+      <label class="m-input-item">
+        <!--icon-->
+        <span class="icon"><img [src]="service.imgs.icon.mobile"></span>
+        <!--输入框-->
+        <input type="number" name="username" [(ngModel)]="form_data.mobile" autocomplete="off" oninput="if(value.length>11)value=value.slice(0,11)" placeholder="请输入手机号">
+        <!--清除icon-->
+        <i class="m-clear" *ngIf="form_data.mobile" (click)="form_data.mobile=null"><img [src]="service.imgs.icon.delete" alt="x"></i>
+      </label>
+      <!--密码输入-->
+      <label class="m-input-item">
+        <!--icon-->
+        <span class="icon"><img [src]="service.imgs.icon.password"></span>
+        <!--输入框-->
+        <input type="password" name="password" [(ngModel)]="form_data.password" placeholder="请输入密码">
+        <!--清除icon-->
+        <i class="m-clear" *ngIf="form_data.password" (click)="form_data.password=null"><img [src]="service.imgs.icon.delete" alt="x"></i>
+      </label>
+      <!--记住密码-->
+      <label class="m-checkbox">
+        <div class="checkbox-main" [class.active]="is_remember">
+          <div class="checkbox-inner"></div>
+        </div>
+        <div class="checkbox-text">记住密码</div>
+        <input type="checkbox" [hidden]="true" name="isRemember" [(ngModel)]="is_remember">
+      </label>
+      <!--提交登录-->
+      <button class="m-btn block theme" [disabled]="!(form_data.mobile&&form_data.password)" (click)="login()">登录</button>
+      <!--注册和找回密码-->
+      <div class="flex-row between">
+        <a routerLink="../register">快速注册</a>
+        <a routerLink="../rePassword">找回密码</a>
+      </div>
+    </form>
+  </div>
+  <!--其他登录方式-->
+  <!--<div class="footer">-->
+    <!--分割线-->
+    <!--<div class="m-lines"><hr><span class="text">其他方式登录</span><hr></div>-->
+    <!--<div class="flex-row around">-->
+      <!--<div><img [src]="service.imgs.icon.qq"></div>-->
+      <!--<div><img [src]="service.imgs.icon.wx"></div>-->
+      <!--<div><img [src]="service.imgs.icon.sina"></div>-->
+    <!--</div>-->
+  <!--</div>-->
+</ion-content>
+
+
+
+
+

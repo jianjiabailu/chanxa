@@ -1,0 +1,23 @@
+
+.page-title{
+  font-size: 1.1em;
+  padding: .5em 1em;
+}
+
+.input-item{
+  padding: .5em 0;
+  margin: 0 8px;
+  border-radius: 4px;
+  background-color: white;
+  .icon{ height: 1.5em; margin: 0 .5em;}
+  input{
+    outline: none; border: none;
+    font-size: inherit;
+    background-color: transparent;
+  }
+}
+
+.code-btn{
+  margin-top: 50px;
+  padding: 0 10px;
+}

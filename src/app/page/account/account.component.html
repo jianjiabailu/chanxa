@@ -1,0 +1,76 @@
+
+  <!--我的账户信息和设置-->
+  <div class="info-header home-header-bg">
+    <div>
+      <!--用户头像-->
+      <a class="portrait" routerLink="../../pages/information"><img *ngIf="my_info.headImg" [src]="service.img_server+my_info.headImg"></a>
+      <!--用户名称-->
+      <h6>{{my_info.name}}</h6>
+    </div>
+    <!--用户设置-->
+    <a class="setting" routerLink="../../pages/setting"><img [src]="service.imgs.icon.setting"></a>
+  </div>
+
+  <!--查看我的订单-->
+  <div class="m-list">
+    <!--不带参数跳转-->
+    <div class="m-list-item flex-row middle" routerLink="../../pages/orderList">
+      <img class="m-icon-md" [src]="service.imgs.account.dingdan" alt="">
+      <div class="flex">我的订单</div>
+      <span class="placeholder">查看全部订单</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <!--带参数跳转-->
+    <div class="m-list-item flex-row text-center" >
+      <div class="flex" routerLink="../../pages/orderList" [queryParams]="{status : 10}">
+        <img class="m-icon-lg" [src]="service.imgs.account.dfk" alt=""><p>待付款</p>
+      </div>
+      <div class="flex" routerLink="../../pages/orderList" [queryParams]="{status : 20}">
+        <img class="m-icon-lg" [src]="service.imgs.account.dfh" alt=""><p>待发货</p>
+      </div>
+      <div class="flex" routerLink="../../pages/orderList" [queryParams]="{status : 30}">
+        <img class="m-icon-lg" [src]="service.imgs.account.dsh" alt=""><p>待收货</p>
+      </div>
+      <div class="flex" routerLink="../../pages/orderList" [queryParams]="{status : 40}">
+        <img class="m-icon-lg" [src]="service.imgs.account.dpj" alt=""><p>待评价</p>
+      </div>
+      <div class="flex" routerLink="../../pages/refundsList">
+        <img class="m-icon-lg" [src]="service.imgs.account.shtk" alt=""><p>退款/售后</p>
+      </div>
+    </div>
+  </div>
+
+  <!--功能菜单-->
+  <div class="m-list">
+    <div class="m-list-item flex-row middle" routerLink="../../pages/addresses">
+      <img class="m-icon-md" [src]="service.imgs.account.address" alt="">
+      <span class="flex">收货地址</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <div class="m-list-item flex-row middle" routerLink="../../pages/favorite">
+      <img class="m-icon-md" [src]="service.imgs.account.collection" alt="">
+      <span class="flex">我的收藏</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <div class="m-list-item flex-row middle" routerLink="../../pages/discountTicket">
+      <img class="m-icon-md" [src]="service.imgs.account.coupons" alt="">
+      <span class="flex">我的优惠券</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <div class="m-list-item flex-row middle" routerLink="../../pages/discountCode">
+      <img class="m-icon-md" [src]="service.imgs.account.decout" alt="">
+      <span class="flex">优惠码</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <div class="m-list-item flex-row middle" routerLink="../../pages/history">
+      <img class="m-icon-md" [src]="service.imgs.account.history" alt="">
+      <span class="flex">浏览历史</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <div class="m-list-item flex-row middle" routerLink="../../pages/news">
+      <img class="m-icon-md" [src]="service.imgs.account.messages" alt="">
+      <span class="flex">消息中心</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+  </div>
+

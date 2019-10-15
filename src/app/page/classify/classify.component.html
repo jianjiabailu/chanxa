@@ -1,0 +1,25 @@
+
+<!--悬浮侧边栏，商品主类名-->
+<aside class="aside-list">
+  <div class="aside-item"
+       [class.active]="menuActive == item.catagoryId"
+       *ngFor="let item of menu"
+       (click)="getTypes(item.catagoryId)">
+    {{item.catagoryName}}
+  </div>
+</aside>
+
+<!--商品分类列表-->
+<div class="sort-list">
+  <div *ngFor="let item of source">
+    <p class="title">{{item.catagoryName}}</p>
+    <ion-row>
+      <ion-col size="4" *ngFor="let i of item.rows">
+        <div class="text-center" routerLink="../../pages/goodsList" [queryParams]="{'catagoryId':item.catagoryId}">
+          <img class="icon" [src]="service.img_server+i.image" alt="">
+          <p class="text-center">{{i.catagoryName}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</div>

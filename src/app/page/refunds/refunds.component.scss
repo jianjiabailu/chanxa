@@ -1,0 +1,28 @@
+
+ion-checkbox{
+  --ion-border-color : transparent;
+}
+ion-item{
+  font-size: inherit;
+}
+ion-textarea{
+  --padding-top:0;
+}
+
+h6{color: #959595;}
+
+.select-box{
+  position: relative;
+  .m-list-item{padding: .5em 1em;}
+  .m-icon-xs{width: 1em;height: auto;}
+  .select-option{
+    z-index: 999;
+    position: absolute;
+    width: 100%; height: auto;
+    background-color: white;
+    box-shadow: 0 4px 6px 0 rgba(148,139,139,0.50);
+    .m-list-item:not(:last-child){
+      border-bottom: 1px solid #F0F0F0;
+    }
+  }
+}

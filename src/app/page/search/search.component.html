@@ -1,0 +1,111 @@
+<ion-content>
+
+  <!--顶部搜索框-->
+  <div class="top-search flex-row middle">
+    <form class="flex-row middle box">
+      <!--选择搜索模式-->
+      <div class="search-model flex-row middle" (click)="_search.type_view = !_search.type_view">
+        <span>{{_search.type_value == 1 ? '商品' : '店铺'}}</span>
+        <img class="icon-sm" [src]="service.imgs.icon.triangle" alt="">
+        <ul class="fab" *ngIf="_search.type_view">
+          <li (click)="_search.type_value = 1">商品</li>
+          <li (click)="_search.type_value = 2">店铺</li>
+        </ul>
+      </div>
+      <!--输入控件-->
+      <div class="search-input flex flex-row middle">
+        <i class="m-icon m-icon-search"></i>
+        <input class="flex" type="text" autocomplete="off" name="value" [(ngModel)]="http_params.name" placeholder="搜索">
+        <i class="m-icon m-icon-delete" *ngIf="http_params.name" (click)="deleteSearch()"></i>
+      </div>
+    </form>
+    <!--搜索或取消按钮-->
+    <div class="btn-box">
+      <span *ngIf="!http_params.name" (click)="cancel()">取消</span>
+      <span *ngIf="http_params.name" (click)="searchData()">搜索</span>
+    </div>
+  </div>
+
+  <!--历史搜索记录-->
+  <div class="search-history" *ngIf="_search.content_view==1">
+    <div class="yes-history" *ngIf="_search.history">
+      <div class="flex-row middle">
+        <i class="m-icon m-icon-search"></i>
+        <span style="margin-left: .5em;">历史搜索</span>
+      </div>
+      <ul class="flex-row wrap">
+        <!--历史查询记录-->
+        <li class="history" *ngFor="let i of _search.history" (click)="http_params.name=i">{{i}}</li>
+      </ul>
+      <!--清除按钮-->
+      <div class="flex-row center middle" (click)="deleteHistory()">
+        <img class="icon" [src]="service.imgs.icon.trash_blue" alt="">
+        <span>清除搜索记录</span>
+      </div>
+    </div>
+    <div class="no-history text-center" *ngIf="!_search.history">
+      <i><img [src]="service.imgs.icon.search" alt=""></i>
+      <p>暂无搜索记录</p>
+    </div>
+  </div>
+
+  <!--搜索结果-->
+  <div *ngIf="_search.content_view==2">
+    <div *ngIf="http_params.type==1">
+      <!--排序选项-->
+      <div class="orderBy-bar flex-row text-center">
+        <div class="flex" [class.active]="http_params.orderType=='all'" (click)="orderBySearch('all')">综合</div>
+        <div class="flex" [class.active]="http_params.orderType=='salesNums'" (click)="orderBySearch('salesNums')">销量</div>
+        <div class="flex"
+             [class.active]="http_params.orderType=='listPrice'"
+             [class.up]="http_params.orderBy=='asc'"
+             [class.down]="http_params.orderBy=='Desc'"
+             (click)="orderBySearch('listPrice')"
+        >价格<i class="m-icon m-icon-updown"></i></div>
+      </div>
+      <!--商品列表-->
+      <div class="goods-list">
+        <ion-row>
+          <ion-col size="6" *ngFor="let goods of _search.result.rows">
+            <div class="goods-item" routerLink="../../pages/goodsDetail/{{goods.goodsId}}">
+              <!--商品预览图-->
+              <div class="img"><img [src]="service.img_server+goods.goodsImg" alt=""></div>
+              <div style="padding: .1em .5em;">
+                <!--商品名称-->
+                <p class="title ellipse">{{goods.goodsName}}</p>
+                <!--商品价格-->
+                <h5 class="mark text-center">￥{{goods.listPrice}}</h5>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <!--店铺搜索结果-->
+    <div *ngIf="http_params.type==2">
+      <ul class="store-list">
+        <li class="store-item flex-row middle" *ngFor="let store of _search.result.rows" routerLink="../store/{{store.shopId}}">
+          <!--店铺LOGO-->
+          <img class="pic" [src]="service.img_server+store.logoImage" alt="">
+          <div class="flex">
+            <!--店铺名-->
+            <h6>{{store.shopName}}</h6>
+            <p class="flex-row">
+              <label>产品描述<span class="mark">{{store.productSocre}}</span></label>
+              <label>服务质量<span class="mark">{{store.serviceSocre}}</span></label>
+              <label>物流速度<span class="mark">{{store.logisticsScore}}</span></label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!--搜索无结果-->
+  <div class="none flex-column center text-center" *ngIf="_search.content_view==3">
+    <p><img [src]="service.imgs.icon.search" alt=""></p>
+    <p>您搜索的关键词没有找到该{{http_params.type==1?'商品':'店铺'}},请重新输入。</p>
+  </div>
+
+</ion-content>

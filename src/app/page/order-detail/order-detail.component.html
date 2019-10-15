@@ -1,0 +1,87 @@
+<ion-content>
+
+  <!-- 订单状态 -->
+  <div class="header-bar flex-row center middle">
+    <img class="m-icon-md" [src]="service.imgs.icon.order_status_dfh" alt="">
+    <span>{{orderDetail.refundStatusCN}}</span>
+  </div>
+
+  <!-- 收件信息 -->
+  <div class="m-list-item">
+    <p class="flex-row middle">
+      <span>收货人：{{orderDetail.receive_name}}</span>
+      <span style="margin-left: 1em;">{{orderDetail.receive_mobile}}</span>
+    </p>
+    <p>收货地址：{{orderDetail.receive_address}}</p>
+  </div>
+
+  <!-- 订单详情 -->
+  <div class="m-panel">
+    <div class="m-panel-hd flex-row between arrow">
+      <div class="flex-row middle">
+        <!--店铺LOGO-->
+        <img class="logo" *ngIf="orderDetail.logo_image" [src]="service.img_server+orderDetail.logo_image" alt="">
+        <!--店铺名称-->
+        <span>{{orderDetail.shop_name}}</span>
+      </div>
+      <!--订单状态-->
+      <div class="mark">{{orderDetail.statusCN}}</div>
+    </div>
+    <div class="flex-row m-panel-bd" *ngFor="let item of orderDetail['items']">
+      <!--商品缩略图-->
+      <div class="picture"><img *ngIf="item.sku_image" [src]="service.img_server+item.sku_image" alt=""></div>
+      <div class="flex orders-item">
+        <div class="flex-row end">
+          <!--商品标题-->
+          <div class="left ellipse">{{item.item_name}}</div>
+          <!--商品价格-->
+          <div class="mark right text-end">￥{{item.price}}.00</div>
+        </div>
+        <div class="flex-row end">
+          <!--商品规格-->
+          <div class="left">{{item.itemAttrStr}}</div>
+          <!--商品数量-->
+          <div class="right text-end">X{{item.nums}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="m-panel-ft">
+      <div class="m-btn flex-row center middle"><img class="m-icon-xs" [src]="service.imgs.icon.contact_blue" alt=""><span>联系卖家</span></div>
+    </div>
+  </div>
+
+  <!-- 付款信息 -->
+  <div class="m-list-item">
+    <p class="flex-row between"><span>运费</span><span>￥{{orderDetail.express_fee}}.00</span></p>
+    <p class="flex-row between"><span>优惠券</span><span>￥{{orderDetail.sales_total==null?"0":orderDetail.sales_total}}.00</span></p>
+    <p class="flex-row between"><span>实付款</span><span>￥{{orderDetail.order_total}}.00</span></p>
+  </div>
+
+  <!-- 买家留言 -->
+  <div class="m-list-item">
+    <p>买家留言：{{orderDetail.buyer_bak == "null"?"无":orderDetail.buyer_bak}}</p>
+  </div>
+
+  <!-- 订单信息 -->
+  <div class="m-list-item">
+    <p>订单编号：{{orderDetail.order_id}}</p>
+    <p>创建时间：{{orderDetail.create_time}}</p>
+  </div>
+
+  <!--orderStatus	10	待付款-->
+  <!--orderStatus	20	等待发货-->
+  <!--orderStatus	30	等待收货-->
+  <!--orderStatus	40	交易成功-->
+  <!--orderStatus	50	交易关闭-->
+  <!--orderStatus	60	已申请退款-->
+  <!-- 操作栏 -->
+  <div class="m-list-item text-end">
+    <!--<button class="m-btn">{{orderDetail.refundStatusCN}}</button>-->
+    <button class="m-btn" *ngIf="orderDetail['status'] == 10" (click)="concelOrder()">取消订单</button>
+    <button class="m-btn" *ngIf="orderDetail['status'] == 10" (click)="payOrder()">付款</button>
+    <button class="m-btn" *ngIf="orderDetail['status'] == 20">提醒发货</button>
+    <button class="m-btn" *ngIf="orderDetail['status'] == 20 || orderDetail['status'] == 30" routerLink="../../refunds/{{orderDetail.order_id}}">申请退款</button>
+    <button class="m-btn" *ngIf="orderDetail['status'] == 40" routerLink="../../evaluate/{{orderDetail.order_id}}" [queryParams]="{sku_id:orderDetail.items[0].goods_sku_id}">评价</button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,22 @@
+
+.aside-list{
+  position: absolute;
+  left: 0; top: 0;
+  width: 100px; max-height: 100%;
+  overflow: auto; z-index: 99;
+  .aside-item{padding: 1em .8em;text-align: center;position: relative;}
+  .aside-item.active:before{
+    content: '';
+    position: absolute;
+    width: 6px; height: 40%;
+    left: 0; top: 30%;
+    background-color: #e83e8c;
+  }
+  .aside-item:not(.active){background-color: white;}
+  .aside-item:not(:first-child){margin-bottom: 1px;}
+}
+.sort-list{
+  padding-left: 110px;
+  .title{margin: 1em 0;}
+  ion-row{background-color: white;}
+}

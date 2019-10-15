@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="ticket-list">
+    <div class="ticket" *ngFor="let item of my_tickets">
+      <div class="left flex-column center">
+        <img class="bg" [src]="service.imgs.icon.ticket_left" alt="">
+        <p class="text-center">￥<span class="font-lg">{{item.amount}}</span></p>
+      </div>
+      <div class="right">
+        <img class="bg" [src]="service.imgs.icon.ticket_right" alt="">
+        <div>
+          <p>{{item.store}}</p>
+          <ul><li *ngFor="let i of item.limit"><small>{{i}}</small></li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!--无订单状态-->
+    <div class="none-content text-center" *ngIf="my_tickets.length <= 0">
+      <p><img class="icon" [src]="service.imgs.icon.wudingdang" alt=""></p>
+      <p>您还没有优惠券</p>
+      <p><button class="m-btn theme-border" routerLink="../../tabs/home">随便逛逛</button></p>
+    </div>
+
+    <!--<div *ngIf="my_tickets.length<=0">-->
+      <!--<div class="ticket" *ngFor="let item of test_tickets">-->
+        <!--<div class="left flex-column center">-->
+          <!--<img class="bg" [src]="service.imgs.icon.ticket_left" alt="">-->
+          <!--<p class="text-center">￥<span class="font-lg">{{item.amount}}</span></p>-->
+        <!--</div>-->
+        <!--<div class="right">-->
+          <!--<img class="bg" [src]="service.imgs.icon.ticket_right" alt="">-->
+          <!--<div>-->
+            <!--<p>{{item.store}}</p>-->
+            <!--<ul><li *ngFor="let i of item.limit"><small>{{i}}</small></li></ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+  </div>
+</ion-content>

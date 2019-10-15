@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="m-list">
+    <div class="m-list-item flex-row" *ngFor="let i of [1,2,3,4]" routerLink="../newsDetail/{{'6454655'}}">
+      <!--消息缩略图-->
+      <img class="pic" [src]="img.goods.swear">
+      <div class="flex-column around content">
+        <div class="flex-row between">
+          <!--消息标题-->
+          <h6>完美大放送啦！</h6>
+          <!--发布时间-->
+          <time>2015-07-29</time>
+        </div>
+        <!--消息预览-->
+        <div>明日加油更便宜啦！加满一箱油能省满一箱</div>
+      </div>
+    </div>
+  </div>
+</ion-content>

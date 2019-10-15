@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="m-list-item">
+    <ion-textarea rows="6" maxlength="200" name="comment" [(ngModel)]="evaluate.comment_content" placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></ion-textarea>
+    <p class="text-end">0/200</p>
+  </div>
+
+  <div class="m-list">
+    <div class="m-list-item flex-row middle">
+      <span>产品描述：</span>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.product_score >=1" (click)="evaluate.product_score=1"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.product_score >=2" (click)="evaluate.product_score=2"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.product_score >=3" (click)="evaluate.product_score=3"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.product_score >=4" (click)="evaluate.product_score=4"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.product_score >=5" (click)="evaluate.product_score=5"></i>
+    </div>
+    <div class="m-list-item flex-row middle">
+      <span>服务质量：</span>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.service_score >=1" (click)="evaluate.service_score=1"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.service_score >=2" (click)="evaluate.service_score=2"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.service_score >=3" (click)="evaluate.service_score=3"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.service_score >=4" (click)="evaluate.service_score=4"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.service_score >=5" (click)="evaluate.service_score=5"></i>
+    </div>
+    <div class="m-list-item flex-row middle">
+      <span>物流速度：</span>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.logistics_score >=1" (click)="evaluate.logistics_score=1"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.logistics_score >=2" (click)="evaluate.logistics_score=2"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.logistics_score >=3" (click)="evaluate.logistics_score=3"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.logistics_score >=4" (click)="evaluate.logistics_score=4"></i>
+      <i class="m-icon m-icon-star" [class.active]="evaluate.logistics_score >=5" (click)="evaluate.logistics_score=5"></i>
+    </div>
+  </div>
+
+  <footer class="text-end">
+    <button class="m-btn theme" (click)="evaluateOrder()">提交评价</button>
+  </footer>
+</ion-content>

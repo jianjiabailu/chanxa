@@ -1,0 +1,24 @@
+
+.header-bar{
+  margin: 1px 0;
+  background-color: #87D647;
+  color: white;
+  padding: .5em 0;
+  font-size: 18px;
+}
+.address-info{
+  margin-top: 10px;
+  background-color: white;
+}
+
+div.arrow{padding-right: 30px;}
+
+.m-panel{
+  .picture{width: 80px; height: 80px;margin-right: 10px;}
+  .m-btn.block{margin: 0;border-color: #979797;color: inherit;}
+}
+
+.m-list-item:not(:last-child){margin: 10px 0;}
+.m-list-item{
+  .m-btn{margin-left: 1em;color: #5DC6C1;border-color: #5DC6C1;}
+}

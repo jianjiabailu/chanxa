@@ -1,0 +1,30 @@
+<ion-content>
+  <form class="m-list">
+    <div class="m-list-item flex-row">
+      <span class="flex">收货人姓名</span>
+      <input type="text" name="receiverName" [(ngModel)]="my_address.receiverName" placeholder="请输入收货人姓名">
+    </div>
+    <div class="m-list-item flex-row">
+      <span class="flex">手机号码</span>
+      <input type="number" name="mobile" [(ngModel)]="my_address.mobile" placeholder="请输入手机号码">
+    </div>
+    <div class="m-list-item flex-row">
+      <span class="flex">省市区</span>
+      <ion-select mode="ios" okText="确定" cancelText="取消" name="province" [interfaceOptions]="{header: '省份'}" [(ngModel)]="areas_list.selected_province" (ionChange)="areaSelect('province')">
+        <ion-select-option *ngFor="let province of areas_list.province" [value]="province.code">{{province.name}}</ion-select-option>
+      </ion-select>
+      <ion-select mode="ios" okText="确定" cancelText="取消" name="city" [interfaceOptions]="{header: '城市'}" [(ngModel)]="areas_list.selected_city" (ionChange)="areaSelect('city')">
+        <ion-select-option *ngFor="let city of areas_list.city" [value]="city.code">{{city.name}}</ion-select-option>
+      </ion-select>
+      <ion-select mode="ios" okText="确定" cancelText="取消" name="county" [interfaceOptions]="{header: '县城'}" [(ngModel)]="areas_list.selected_county">
+        <ion-select-option *ngFor="let county of areas_list.county" [value]="county.code">{{county.name}}</ion-select-option>
+      </ion-select>
+    </div>
+    <div class="m-list-item flex-row">
+      <span class="flex">详细地址</span>
+      <ion-textarea name="address" rows="3" maxlength="34" [(ngModel)]="my_address.receiverAdress" placeholder="请输入详细地址"></ion-textarea>
+    </div>
+  </form>
+
+  <div style="padding: 0 5px; margin-top: 30px;"><button class="m-btn block theme" (click)="updateAddress()">{{btn_content}}</button></div>
+</ion-content>

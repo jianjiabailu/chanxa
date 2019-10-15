@@ -1,0 +1,31 @@
+<ion-content>
+  <!--全选和编辑-->
+  <header class="text-center">
+    <span (click)="clearHistory()">清空</span>
+  </header>
+  <div class="goods-list">
+    <div class="list-item flex-row" *ngFor="let item of goodsBrowseList">
+      <!--商品缩略图-->
+      <div class="pic"><img [src]="service.img_server+item.goods_image" alt=""></div>
+      <div class="flex flex-column between">
+        <!--商品名称与跳转商品详情页的链接-->
+        <title class="ellipse" routerLink="../goodsDetail/165">{{item.goods_name}}</title>
+        <hr>
+        <div class="flex-row between middle">
+          <!--商品价格-->
+          <span class="mark">￥{{item.list_price}}</span>
+          <!--删除图标-->
+          <!--<img class="icon" [src]="img.icon.trash_blue" alt="">-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--无历史记录时-->
+  <div class="none-content text-center" *ngIf="goodsBrowseList.length <= 0">
+    <p><img class="icon" [src]="service.imgs.icon.wudingdang" alt=""></p>
+    <p>您还没有相关记录</p>
+    <p><button class="m-btn theme-border" routerLink="../../tabs/home">随便逛逛</button></p>
+  </div>
+
+</ion-content>

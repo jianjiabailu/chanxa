@@ -1,0 +1,10 @@
+
+<ion-content>
+  <p class="page-title">优惠序号</p>
+  <div class="flex-row input-item">
+    <div class="icon"><img [src]="img.icon.yhm" alt=""></div>
+    <input class="flex" type="text" name="code" [(ngModel)]="code" placeholder="请输入优惠码">
+  </div>
+
+  <div class="code-btn"><button class="m-btn block theme" (click)="exchangeTickets()">兑换</button></div>
+</ion-content>

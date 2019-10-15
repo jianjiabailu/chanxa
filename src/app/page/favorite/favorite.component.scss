@@ -1,0 +1,31 @@
+
+.header-bar{
+  >div{padding: .5em;background-color: white;color: #959595;}
+  >div.active{color: #EC3F78;}
+  >div:first-child{margin-right: 3px;}
+  h3{margin: .2em 0;}
+}
+
+.goods-list, .store-list{
+  .list-item{
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+    >div:last-child{padding: 0 10px;}
+    img.icon{width: 1.2em;}
+    .title{font-size: 1.2em;}
+  }
+}
+
+.goods-list{
+  .list-item{
+    .pic{width: 80px; height: 80px;}
+    hr{width: 100%;background-color: #CDCDCD;}
+    title{margin-bottom: .5em;}
+  }
+}
+.store-list{
+  .list-item{
+    .logo{width: 80px; height: 80px;margin-right: 1em;}
+  }
+}

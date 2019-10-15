@@ -1,0 +1,28 @@
+<ion-content>
+
+  <div class="m-panel" *ngFor="let item of my_addresses">
+    <div class="panel-hd" (click)="selectAddress(item)">
+      <h6><span>{{item.receiverName}}</span><span>{{item.mobile}}</span></h6>
+      <p>{{item.location + item.receiverAdress}}</p>
+    </div>
+    <div class="panel-bd flex-row between">
+      <div class="flex-row center">
+        <ion-checkbox mode="ios" color="danger" [checked]="isDefault(item)" (ionFocus)="setDefaultAddress(item)"></ion-checkbox>
+        <span>设为默认</span>
+      </div>
+      <div class="flex-row middle">
+        <div class="flex-row middle" routerLink="../address" [queryParams]="{'receiverId':item.receiverId}"><img [src]="img.icon.edit" alt=""><span>编辑</span></div>
+        <div class="flex-row middle" (click)="deleteAddress(item.receiverId)"><img [src]="img.icon.trash" alt=""><span>删除</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 无数据状态 -->
+  <div style="height: 76vh;color: #959595;" class="flex-column center" *ngIf="my_addresses.length <= 0">
+    <p class="text-center">您还没有添加收货地址</p>
+  </div>
+
+  <div style="padding: 0 .5em;"><button class="m-btn block theme" routerLink="../address">添加</button></div>
+
+</ion-content>
+

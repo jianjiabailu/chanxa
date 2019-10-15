@@ -1,0 +1,74 @@
+<ion-content #content [scrollEvents]="true" (ionScroll)="scrolling()" (ionScrollEnd)="scrollEnd()">
+
+<!--状态栏-->
+  <!--orderStatus	10	待付款-->
+  <!--orderStatus	20	等待发货-->
+  <!--orderStatus	30	等待收货-->
+  <!--orderStatus	40	交易成功-->
+  <!--orderStatus	50	交易关闭-->
+  <!--orderStatus	60	已申请退款-->
+<div class="flex-row text-center header-bar">
+  <div [class.active]="status==0"  (click)="getMyOrders(0)" >全部</div>
+  <div [class.active]="status==10" (click)="getMyOrders(10)">代付款</div>
+  <div [class.active]="status==20" (click)="getMyOrders(20)">待发货</div>
+  <div [class.active]="status==30" (click)="getMyOrders(30)">待收货</div>
+  <div [class.active]="status==40" (click)="getMyOrders(40)">待评价</div>
+</div>
+<!--订单列表-->
+<div class="m-panel-group">
+  <div class="m-panel" *ngFor="let item of my_orders">
+    <div class="m-panel-hd flex-row between">
+      <div class="flex-row center">
+        <!--店铺LOGO-->
+        <img class="logo" [src]="service.img_server+item.logo_image" alt="">
+        <!--店铺名称-->
+        <span>{{item['shop_name']}}</span>
+      </div>
+      <!--订单状态-->
+      <span class="mark">{{item['statusCN']}}</span>
+    </div>
+    <div class="flex-row m-panel-bd" *ngFor="let i of item.items" (click)="saveData()" routerLink="../orderDetail/{{item.order_id}}">
+      <!--商品图片-->
+      <div class="picture"><img [src]="service.img_server+i.sku_image" alt=""></div>
+      <div class="flex orders-item">
+        <div class="flex-row end">
+          <!--商品名称-->
+          <div class="left ellipse">{{i.item_name}}</div>
+          <!--商品价格-->
+          <div class="right text-end">￥{{i.price}}</div>
+        </div>
+        <div class="flex-row end">
+          <!--商品规格-->
+          <div class="left">
+            <span class="attr" *ngFor="let m of i.attrList">{{m.catagory_attr_name +"："+ m.catagory_attr_value_name}}</span>
+          </div>
+          <!--商品数量-->
+          <div class="right text-end">X{{i.nums}}</div>
+        </div>
+      </div>
+    </div>
+    <!--店铺合计-->
+    <div class="m-panel-ft text-end">本店合计：￥{{item.item_total}}</div>
+    <!--操作按钮-->
+    <div class="m-panel-ft text-end">
+      <button class="m-btn" *ngIf="item.status == 10" (click)="payOrder(item.order_id)">去付款</button>
+      <button class="m-btn" *ngIf="item.status == 20">提醒发货</button>
+      <button class="m-btn" *ngIf="item.status == 30" (click)="confirmReceipt(item.order_id)">确认收货</button>
+      <button class="m-btn" *ngIf="item.status == 30">延长收货</button>
+      <button class="m-btn" *ngIf="item.status == 30">查看物流</button>
+      <button class="m-btn" *ngIf="item.status == 40" routerLink="../evaluate/{{item.order_id}}" [queryParams]="{sku_id:item.items[0].goods_sku_id}">评价</button>
+      <button class="m-btn" *ngIf="item.status == 50" (click)="deleteOrder(item.order_id)">删除订单</button>
+    </div>
+  </div>
+
+  <!--无订单状态-->
+  <div class="none-content text-center" *ngIf="my_orders.length <= 0">
+    <p><img class="icon" [src]="service.imgs.icon.wudingdang" alt=""></p>
+    <p>您还没有相关记录</p>
+    <p><button class="m-btn theme-border" routerLink="../../tabs/home">随便逛逛</button></p>
+  </div>
+
+</div>
+
+</ion-content>
+

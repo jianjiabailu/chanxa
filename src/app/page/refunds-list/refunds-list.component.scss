@@ -1,0 +1,14 @@
+
+.m-panel{
+  margin-top: 10px;
+  .picture{width: 80px; height: 80px;margin-right: 10px;}
+  .m-btn{
+    margin-left: 1em;
+    color: #5DC6C1;
+    border-color: #5DC6C1;
+    font-size: 1.0em;
+  }
+  .orders-item>div:not(:last-child){
+    margin-bottom: .5em;
+  }
+}

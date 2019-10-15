@@ -1,0 +1,90 @@
+
+<ion-content>
+  <div class="header-bar flex-row middle center">
+    <!--状态ICON-->
+    <img class="m-icon-xs" [src]="service.imgs.icon.success" alt="">
+    <!-- 订单状态 -->
+    <span>{{refunds_order['statusCN']}}</span>
+  </div>
+
+  <!--<div class="order-item">-->
+    <!--<p>关闭原因：由于买家拒绝申请后您超时为修改申请</p>-->
+    <!--<p>关闭时间：2018-01-08  10:00</p>-->
+  <!--</div>-->
+
+  <!-- 收货人信息 -->
+  <!--<div class="m-list-item">-->
+    <!--<p class="flex-row middle">-->
+      <!--<span>收货人：{{refunds_order['receive_name']}}</span>-->
+      <!--<span>{{refunds_order['receive_mobile']}}</span>-->
+    <!--</p>-->
+    <!--<p class="flex-row">收货地址：{{refunds_order['receive_address']}}</p>-->
+  <!--</div>-->
+
+  <!--退款关闭信息-->
+  <!--<div class="m-list-item">-->
+    <!--<p>关闭原因：{{orderDetail.order_id}}</p>-->
+    <!--<p>关闭时间：{{orderDetail.create_time}}</p>-->
+  <!--</div>-->
+
+  <!--退款成功信息-->
+  <!--<div class="m-list-item">-->
+    <!--<p>退款金额：{{orderDetail.order_id}}</p>-->
+    <!--<p>退款时间：{{orderDetail.create_time}}</p>-->
+  <!--</div>-->
+
+  <!-- 订单详情 -->
+  <div class="m-panel">
+    <div class="m-panel-hd flex-row middle">
+      <!--店铺LOGO-->
+      <img class="logo" [src]="service.img_server + refunds_order.logo_image" alt="">
+      <!--店铺名称-->
+      <span class="flex">{{refunds_order['shop_name']}}</span>
+      <!--订单处理状态-->
+      <span class="mark">{{refunds_order['refundStatusCN']}}</span>
+      <i class="m-icon m-icon-arrow"></i>
+    </div>
+    <div class="flex-row m-panel-bd" *ngFor="let item of refunds_order['items']">
+      <!--商品缩略图-->
+      <div class="picture"><img [src]="service.img_server + item.sku_image"></div>
+      <div class="flex orders-item" routerLink="../../goodsDetail/{{item.goods_id}}">
+        <div class="flex-row end">
+          <!--商品名称-->
+          <div class="left ellipse">{{item.item_name}}</div>
+          <!--商品价格-->
+          <div class="mark right text-end">￥{{item.price}}.00</div>
+        </div>
+        <div class="flex-row end">
+          <!--商品规格-->
+          <div class="left">{{item.itemAttrStr}}</div>
+          <!--商品数量-->
+          <div class="right text-end">X{{item.nums}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-list">
+    <div class="m-list-item flex-row between">
+      <span>退款类型</span>
+      <span>{{refunds_apply['applyTypeCN']}}</span>
+    </div>
+    <div class="m-list-item flex-row between">
+      <span>退款金额</span>
+      <span>￥{{refunds_apply['seller_amount']}}.00</span>
+    </div>
+    <div class="m-list-item flex-row between">
+      <span>退款原因</span>
+      <span>拍错了/订单信息错误</span>
+    </div>
+    <div class="m-list-item flex-row between">
+      <span>退款说明</span>
+      <span>{{refunds_apply['refund_bak']}}</span>
+    </div>
+    <div class="m-list-item flex-row between">
+      <span>申请时间</span>
+      <span>{{refunds_apply['apply_time']}}</span>
+    </div>
+  </div>
+
+</ion-content>
